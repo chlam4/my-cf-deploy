@@ -1,7 +1,7 @@
 # Deploy Cloud Foundry locally using Bosh Lite
 
 This captures my experience of deploying Cloud Foundry using bosh lite (v2) in my local MacBook.  
-The  steps are based on the following pages:
+The steps are based on the following pages:
 * Procedure to deploy bosh lite - https://bosh.io/docs/bosh-lite
 * Procedure to deploy Cloud Foundry with Diego -
 https://github.com/cloudfoundry/diego-release/tree/develop/examples/bosh-lite
@@ -49,13 +49,14 @@ Instead of using the `generate-bosh-lite-dev-manifest` script as described in th
 which does not work for bosh v2, please directly invoke `generate_deployment_manifest` as in the 
 end of the `generate-bosh-lite-dev-manifest` script as follows:
 ```
+mkdir -p ${CF_RELEASE_DIR}/bosh-lite/deployments
 "${CF_RELEASE_DIR}/scripts/generate_deployment_manifest" \
   bosh-lite \
   <(echo "director_uuid: ${DIRECTOR_UUID}") \
   "$@" \
   > "${CF_RELEASE_DIR}/bosh-lite/deployments/cf.yml"
 ```
-The `CF_RELEASE_DIR` can be obtained using the following bosh v2 command, `bosh -e vbox env`, 
+The `DIRECTOR_UUID` can be obtained using the following bosh v2 command, `bosh -e vbox env`, 
 where `vbox` is the env alias when I deploy bosh lite.
  
 ### Generate Diego manifest
